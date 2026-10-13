@@ -1,99 +1,85 @@
 # Beresin
 
-Beresin adalah platform layanan request pekerjaan yang memungkinkan pengguna mengajukan kebutuhan, menjelaskan detail pekerjaan, melampirkan dokumen pendukung, dan menawarkan budget. Admin akan meninjau setiap request dan menentukan apakah request ditolak, diterima, atau diterima dengan penawaran alternatif.
+Beresin adalah halaman request pekerjaan tanpa akun. Pengguna mengisi form kebutuhan, lalu
+request langsung dikirim ke WhatsApp admin lewat deep link `wa.me` dengan pesan yang sudah
+tersusun dari isi form. Negosiasi, kesepakatan, dan pengiriman file berlanjut di chat WhatsApp.
 
-Setelah kesepakatan tercapai, komunikasi antara pengguna dan admin dilanjutkan melalui WhatsApp.
+Tidak ada backend: tidak ada database, panel admin, upload file, atau API route. Seluruh
+halaman dirender statis.
 
-## Alur Sistem
+## Alur
 
 ```text
 Pengguna mengisi form request
           ↓
-Request disimpan ke database
+Form divalidasi di browser
           ↓
-Admin meninjau request
+WhatsApp terbuka dengan pesan request yang sudah terisi
           ↓
-Ditolak / Diterima / Penawaran alternatif
+Pengguna menekan Kirim di WhatsApp
           ↓
-Pengguna menerima notifikasi email
-          ↓
-Kesepakatan tercapai
-          ↓
-Komunikasi dilanjutkan melalui WhatsApp
+Admin membalas, negosiasi & kesepakatan di chat yang sama
 ```
 
-## Fitur Utama
+## Fitur
 
-### Halaman Pengguna
-- Form pengajuan request pekerjaan tanpa perlu membuat akun.
-- Pengisian judul, kategori, deskripsi, kriteria pekerjaan, budget, dan deadline.
-- Upload lampiran dokumen pendukung.
-- Halaman pelacakan status request melalui tautan khusus.
-- Notifikasi email terkait perubahan status dan penawaran admin.
+- Landing page monokrom dengan animasi dua tangan ASCII ala "The Creation of Adam".
+  Klik **Buat Request** memutar animasi kedua telunjuk bersentuhan sebelum pindah ke form.
+- Form request: judul, deskripsi, kategori, budget, deadline (opsional), nama, dan nomor WhatsApp.
+- Validasi di browser (zod) sebelum WhatsApp dibuka.
+- Pesan WhatsApp terformat otomatis, contoh:
 
-### Panel Admin
-- Login untuk mengakses dashboard administrasi.
-- Melihat dan mengelola request yang masuk.
-- Menerima atau menolak request.
-- Memberikan penawaran alternatif (*counteroffer*) kepada pengguna.
-- Memantau status pekerjaan dan kesepakatan.
-- Memantau pendapatan dari request yang berhasil disepakati.
+```text
+Halo Beresin, saya mau request:
 
-### Notifikasi dan Komunikasi
-- Notifikasi email untuk pembaruan status request dan penawaran.
-- Notifikasi WhatsApp kepada admin saat request baru masuk, sesuai konfigurasi integrasi yang digunakan.
-- Komunikasi langsung melalui WhatsApp setelah kesepakatan tercapai.
+*Judul:* Desain logo untuk kedai kopi
+*Kategori:* Desain Grafis
+*Budget:* Rp 500.000
+*Deadline:* Senin, 20 Oktober 2026
+
+*Detail pekerjaan:*
+...
+
+*Nama:* Budi
+*No. WhatsApp:* +6281234567890
+```
+
+Deskripsi dibatasi 2000 karakter supaya URL `wa.me` tidak terlalu panjang untuk dibuka di
+semua perangkat.
 
 ## Teknologi
 
-- **Frontend:** Next.js, React, dan TypeScript
-- **Database:** PostgreSQL melalui Neon
-- **ORM:** Prisma
-- **Deployment:** Vercel
-- **Version Control:** Git dan GitHub
+- Next.js 15 (App Router), React 19, TypeScript
+- Tailwind CSS v4
+- zod untuk validasi form
+- Deploy: Vercel (atau hosting statis/Node apa pun)
 
 ## Menjalankan Secara Lokal
 
-Pastikan Node.js dan npm sudah terpasang.
-
 ```bash
-# Clone repository
 git clone https://github.com/ricoreynaldo/beresin.git
-
-# Masuk ke direktori project
 cd beresin
-
-# Instal dependensi
 npm install
-
-# Siapkan environment variables
 cp .env.example .env
-
-# Jalankan development server
 npm run dev
 ```
 
-Buka `http://localhost:3000` di browser. Sesuaikan port jika konfigurasi project menggunakan port yang berbeda.
+Buka `http://localhost:3040`.
 
-## Konfigurasi Environment
+## Konfigurasi
 
-Isi variabel lingkungan yang dibutuhkan di file `.env`, sesuai dengan konfigurasi project.
+| Variabel | Keterangan |
+|---|---|
+| `WHATSAPP_NUMBER` | Nomor WhatsApp admin penerima request, format `62xxxxxxxxxx` tanpa `+`. |
+| `BRAND_NAME` | Nama brand di sapaan pesan WhatsApp. Default `Beresin`. |
 
-Contoh variabel yang mungkin diperlukan:
-
-```env
-DATABASE_URL=
-DIRECT_URL=
-AUTH_SECRET=
-```
-
-Konfigurasi aktual mengikuti file `.env.example` dan implementasi integrasi yang digunakan. Jangan commit file `.env` atau membagikan kredensial rahasia ke repository publik.
+Keduanya dibaca saat build karena halaman `/request` statis. Setelah mengubahnya, restart
+`npm run dev` atau deploy ulang.
 
 ## Deployment
 
-Beresin dapat di-deploy melalui Vercel dengan menghubungkan repository GitHub dan mengatur environment variables yang diperlukan.
-
-Pastikan koneksi PostgreSQL, autentikasi, dan integrasi notifikasi telah dikonfigurasi sebelum aplikasi digunakan di lingkungan produksi.
+Hubungkan repository ke Vercel, isi `WHATSAPP_NUMBER` dan `BRAND_NAME` di Environment
+Variables, lalu deploy. Tidak perlu database, storage, atau secret lain.
 
 ## Repository
 
