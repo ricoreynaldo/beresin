@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/*
+ * Palet monokrom: latar off-white, teks & tombol hitam.
+ * "brand" kini skala hitam-netral; "accent" (merah) hanya untuk error.
+ */
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Brand — hitam netral */
+  --color-brand-50: #f4f4f4;
+  --color-brand-100: #e8e8e8;
+  --color-brand-200: #d4d4d4;
+  --color-brand-300: #b5b5b5;
+  --color-brand-400: #8f8f8f;
+  --color-brand-500: #6b6b6b;
+  --color-brand-600: #474747;
+  --color-brand-700: #1f1f1f;
+  --color-brand-800: #141414;
+  --color-brand-900: #0a0a0a;
+
+  /* Accent — merah, khusus error/wajib */
+  --color-accent-50: #fdf1f0;
+  --color-accent-100: #fbdfdc;
+  --color-accent-200: #f7c1bc;
+  --color-accent-300: #ef9a93;
+  --color-accent-400: #d2544a;
+  --color-accent-500: #cd4236;
+  --color-accent-600: #b5382d;
+  --color-accent-700: #932e25;
+  --color-accent-800: #762620;
+  --color-accent-900: #5c1e19;
+
+  /* Netral */
+  --color-ink-50: #f7f7f7;
+  --color-ink-100: #efefef;
+  --color-ink-200: #e2e2e2;
+  --color-ink-300: #cbcbcb;
+  --color-ink-400: #9a9a9a;
+  --color-ink-500: #7a7a7a;
+  --color-ink-600: #5c5c5c;
+  --color-ink-700: #404040;
+  --color-ink-800: #262626;
+  --color-ink-900: #141414;
+
+
+  --radius-card: 1.25rem;
+
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -14px rgb(0 0 0 / 0.16);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.06), 0 18px 40px -20px rgb(0 0 0 / 0.3);
+  --shadow-button: 0 10px 22px -10px rgb(0 0 0 / 0.55);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-ink-200);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-50);
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-700);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: 44rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  /* Latar halaman off-white selebar layar (dulu kartu berbingkai abu-abu). */
+  .site-frame {
+    min-height: 100dvh;
+    background-color: var(--color-ink-50);
+    overflow: clip;
+  }
+
+  .animate-rise {
+    animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
