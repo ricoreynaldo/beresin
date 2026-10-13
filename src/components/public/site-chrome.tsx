@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { RequestCta } from "@/components/public/request-cta";
 import { cn } from "@/lib/utils";
 
 /** Wordmark teks. Tanpa ikon: nama brand sendiri yang jadi logonya. */
@@ -41,9 +40,6 @@ export function SiteHeader({ active }: { active?: NavKey }) {
             </Link>
           ))}
         </nav>
-        <RequestCta size="sm" className="h-10 px-4">
-          Buat Request
-        </RequestCta>
       </div>
     </header>
   );
