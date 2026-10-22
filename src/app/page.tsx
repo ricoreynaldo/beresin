@@ -1,51 +1,37 @@
-import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Check, ClipboardList, Code2, FileCheck2, FileText, Film, MessageCircle, Palette, Search, Send, Sparkle, Sparkles, Table2, type LucideIcon } from "lucide-react";
 import { Hero } from "@/components/public/hero";
 import { RequestCta } from "@/components/public/request-cta";
 import { PublicShell } from "@/components/public/site-chrome";
 import { CATEGORIES } from "@/lib/categories";
 
 const STEPS = [
-  {
-    title: "Ceritakan kebutuhanmu",
-    body: "Isi satu form singkat. Tanpa daftar, tanpa password.",
-  },
-  {
-    title: "Kirim lewat WhatsApp",
-    body: "Pesan request tersusun otomatis. Tinggal tekan Kirim di WhatsApp.",
-  },
-  {
-    title: "Ngobrol & deal di WhatsApp",
-    body: "Kami balas dengan penawaran, lalu pengerjaan dikoordinasikan di chat yang sama.",
-  },
+  { icon: FileText, title: "Ceritain dulu.", body: "Isi satu form singkat. Apa yang dibutuhkan, budget, dan kapan harus selesai.", note: "Tanpa akun. Tanpa password." },
+  { icon: Send, title: "Lanjut di WhatsApp.", body: "Pesan request tersusun otomatis. Kamu tinggal tekan Kirim di WhatsApp.", note: "Referensi? Kirim di chat yang sama." },
+  { icon: Sparkles, title: "Kita beresin bareng.", body: "Ngobrolin detail, sepakati penawaran, lalu pengerjaan dikoordinasikan lewat chat.", note: "Jelas dulu, baru jalan." },
 ];
 
+const CATEGORY_DETAILS: Record<string, { icon: LucideIcon; description: string }> = {
+  DESAIN: { icon: Palette, description: "Logo, poster, sampai identitas brand" },
+  WEB_APP: { icon: Code2, description: "Bikin idemu punya tempat di internet" },
+  KONTEN: { icon: FileText, description: "Kata-kata yang pas buat kebutuhanmu" },
+  VIDEO: { icon: Film, description: "Dari footage mentah jadi cerita" },
+  DATA: { icon: Table2, description: "Data rapi, insight lebih gampang dicari" },
+  AKADEMIK: { icon: Search, description: "Bantuan riset, format, dan presentasi" },
+  CEK_PLAGIASI: { icon: FileCheck2, description: "Bantu periksa kemiripan dokumen" },
+  ADMIN_TASK: { icon: ClipboardList, description: "Urus detail yang menyita waktumu" },
+  LAINNYA: { icon: Sparkles, description: "Belum ada di sini? Ceritain aja dulu" },
+};
+
 const FAQ = [
-  {
-    q: "Apakah perlu membuat akun?",
-    a: "Tidak. Cukup isi form, lalu request dikirim lewat WhatsApp kamu sendiri.",
-  },
-  {
-    q: "Bagaimana kalau saya punya file referensi?",
-    a: "Setelah pesan request terkirim, lampirkan file atau gambar langsung di chat WhatsApp yang sama.",
-  },
-  {
-    q: "Apakah budget bisa dinegosiasikan?",
-    a: "Bisa. Budget di form adalah titik awal; kami akan membalas dengan penawaran yang sesuai di WhatsApp.",
-  },
-  {
-    q: "Kebutuhan saya tidak ada di daftar kategori.",
-    a: "Pilih kategori “Lainnya” dan ceritakan detailnya di deskripsi.",
-  },
+  { q: "Perlu bikin akun dulu?", a: "Nggak perlu. Cukup isi form, lalu request dibuka lewat WhatsApp kamu sendiri. Kamu tinggal tekan Kirim untuk memulai obrolan." },
+  { q: "Kalau punya file atau gambar referensi?", a: "Setelah pesan request terkirim, lampirkan file atau gambar langsung di chat WhatsApp yang sama. Semua referensi dan detail bisa dibahas di sana." },
+  { q: "Budget-nya bisa dibicarakan?", a: "Bisa. Budget di form jadi titik awal. Kami akan membalas dengan penawaran yang sesuai di WhatsApp, lalu kita sepakati dulu sebelum pengerjaan." },
+  { q: "Kebutuhanku nggak ada di kategori, gimana?", a: "Pilih kategori “Lainnya” dan ceritakan detailnya di deskripsi. Kita ngobrol dulu untuk melihat apa yang bisa dibantu." },
 ];
 
 function SectionLabel({ index, children }: { index: string; children: React.ReactNode }) {
-  return (
-    <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-ink-400">
-      <span>[{index}]</span>
-      <span className="h-px w-8 bg-ink-300" />
-      <span>{children}</span>
-    </p>
-  );
+  return <p className="section-label"><span>{index}</span><i />{children}</p>;
 }
 
 export default function LandingPage() {
@@ -53,81 +39,41 @@ export default function LandingPage() {
     <PublicShell active="home">
       <Hero />
 
-      <section id="cara-kerja" className="scroll-mt-6 border-t border-ink-200">
-        <div className="container-page py-20 sm:py-28">
-          <SectionLabel index="01">Cara kerja</SectionLabel>
-          <h2 className="mt-5 max-w-xl text-3xl font-medium leading-tight tracking-[-0.03em] text-ink-900 sm:text-4xl">
-            <span className="text-ink-400">Tiga langkah,</span> lalu biar kami yang beresin.
-          </h2>
-
-          <ol className="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-ink-200 bg-ink-200 sm:grid-cols-3">
-            {STEPS.map((step, index) => (
-              <li key={step.title} className="bg-ink-50 p-6 sm:p-8">
-                <span className="font-mono text-sm text-ink-400">0{index + 1}</span>
-                <h3 className="mt-8 text-lg font-medium tracking-tight text-ink-900">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-500">{step.body}</p>
-              </li>
-            ))}
+      <section id="cara-kerja" className="landing-section how-section">
+        <div className="container-page" data-reveal>
+          <div className="section-heading-row">
+            <div><SectionLabel index="01">Gampang mulainya</SectionLabel><h2>Kamu cerita.<br />Kami bantu <span>cari caranya.</span></h2></div>
+            <p>Nggak perlu briefing yang sempurna.<br />Mulai dari yang kamu tahu dulu aja.</p>
+          </div>
+          <ol className="steps-grid">
+            {STEPS.map((step, index) => <li key={step.title}>
+              <div className="step-top"><span className="step-icon"><step.icon size={25} strokeWidth={1.6} aria-hidden="true" /></span><span className="step-number">0{index + 1}</span></div>
+              <h3>{step.title}</h3><p>{step.body}</p><span className="step-note"><Check size={13} aria-hidden="true" />{step.note}</span>
+            </li>)}
           </ol>
         </div>
       </section>
 
-      <section id="kategori" className="scroll-mt-6 border-t border-ink-200">
-        <div className="container-page py-20 sm:py-28">
-          <SectionLabel index="02">Kategori</SectionLabel>
-          <h2 className="mt-5 max-w-xl text-3xl font-medium leading-tight tracking-[-0.03em] text-ink-900 sm:text-4xl">
-            <span className="text-ink-400">Yang biasa</span> kami beresin.
-          </h2>
-          <div className="mt-10 flex flex-wrap gap-2">
-            {CATEGORIES.map((category) => (
-              <span
-                key={category.value}
-                className="rounded-xl border border-ink-200 bg-white px-4 py-2 text-sm text-ink-700"
-              >
-                {category.label}
-              </span>
-            ))}
+      <section id="kategori" className="landing-section categories-section">
+        <div className="container-page categories-layout" data-reveal>
+          <div className="categories-intro"><SectionLabel index="02">Bisa bantu apa?</SectionLabel><h2>Dari “kepikiran”<br />jadi <span>“kelar juga.”</span></h2><p>Yang kreatif, yang teknis, sampai yang bikin kamu bilang, “aduh, kapan ngerjainnya?”</p><span className="category-doodle" aria-hidden="true"><Sparkle strokeWidth={1.4} /></span><Link href="/request" className="text-link">Ceritakan kebutuhanmu <ArrowUpRight size={17} /></Link></div>
+          <div className="category-list">
+            {CATEGORIES.map((category) => { const detail = CATEGORY_DETAILS[category.value]; const Icon = detail?.icon || Sparkles; return <Link href="/request" key={category.value} className="category-item" aria-label={`Buat request ${category.label}`}><span className="category-icon"><Icon size={21} strokeWidth={1.6} aria-hidden="true" /></span><div><h3>{category.label}</h3><p>{detail?.description || "Ceritakan kebutuhanmu"}</p></div><ArrowUpRight className="category-arrow" size={17} aria-hidden="true" /></Link>; })}
           </div>
         </div>
       </section>
 
-      <section id="faq" className="scroll-mt-6 border-t border-ink-200">
-        <div className="container-page grid gap-10 py-20 sm:py-28 md:grid-cols-[1fr_1.4fr]">
-          <div>
-            <SectionLabel index="03">FAQ</SectionLabel>
-            <h2 className="mt-5 text-3xl font-medium leading-tight tracking-[-0.03em] text-ink-900 sm:text-4xl">
-              <span className="text-ink-400">Pertanyaan</span> yang sering muncul.
-            </h2>
-          </div>
-          <div className="divide-y divide-ink-200 border-y border-ink-200">
-            {FAQ.map((item) => (
-              <details key={item.q} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-medium text-ink-900 [&::-webkit-details-marker]:hidden">
-                  {item.q}
-                  <span className="font-mono text-ink-400 transition-transform group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 max-w-lg text-sm leading-relaxed text-ink-500">{item.a}</p>
-              </details>
-            ))}
-          </div>
+      <section id="faq" className="landing-section faq-section">
+        <div className="container-page faq-layout" data-reveal>
+          <div><SectionLabel index="03">Biar makin kenal</SectionLabel><h2>Masih ada<br /><span>tanda tanya?</span></h2><div className="faq-chat" aria-hidden="true"><MessageCircle size={18} /><span>Tenang, tanya dulu juga boleh.</span><span className="faq-heart">♡</span></div></div>
+          <div className="faq-list">{FAQ.map((item) => <details key={item.q}><summary>{item.q}<span className="faq-plus" aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div>
         </div>
       </section>
 
-      <section className="border-t border-ink-200">
-        <div className="container-page flex flex-col items-center py-20 text-center sm:py-28">
-          <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] sm:text-4xl">
-            <span className="text-ink-400">Siap mulai?</span>
-            <br />
-            <span className="text-ink-900">Ceritakan kebutuhanmu sekarang.</span>
-          </h2>
-          <div className="mt-8">
-            <RequestCta size="lg">
-              Buat Request
-              <ArrowRight className="size-4" aria-hidden />
-            </RequestCta>
-          </div>
+      <section className="closing-section container-page" data-reveal>
+        <div className="closing-panel">
+          <div className="closing-illustration" aria-hidden="true"><span className="closing-ping">Beresin, bisa bantu?</span><span className="happy-face"><i /><i /><b /></span><span className="closing-reply">Bisa. Ceritain dulu <span>♡</span></span><span className="closing-star">✧</span></div>
+          <div className="closing-copy"><span className="section-label">Dari satu chat, kita mulai.</span><h2>To-do kamu banyak.<br />Tenang, ada <span>beresin.</span></h2><p>Nggak harus dipikirin sendirian.<br />Ceritain kebutuhanmu, kita bantu cari jalan.</p><RequestCta size="lg">Yuk, buat request <ArrowRight size={18} aria-hidden="true" /></RequestCta></div>
         </div>
       </section>
     </PublicShell>

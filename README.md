@@ -23,8 +23,11 @@ Admin membalas, negosiasi & kesepakatan di chat yang sama
 
 ## Fitur
 
-- Landing page monokrom dengan animasi dua tangan ASCII ala "The Creation of Adam".
-  Klik **Buat Request** memutar animasi kedua telunjuk bersentuhan sebelum pindah ke form.
+- Landing page putih hangat dengan bubble chat berisi contoh request, avatar ilustratif,
+  indikator mengetik, dan maskot. Pesan bubble berganti bergiliran dengan animasi CSS.
+- Tombol **Jeda animasi** membekukan animasi bubble; gerak juga berhenti saat hero keluar
+  layar atau tab tidak aktif. Preferensi `prefers-reduced-motion` menampilkan bubble statis.
+- CTA **Buat Request** langsung membuka form dan tetap mendukung keyboard serta Ctrl/Cmd-click.
 - Form request: judul, deskripsi, kategori, budget, deadline (opsional), nama, dan nomor WhatsApp.
 - Validasi di browser (zod) sebelum WhatsApp dibuka.
 - Pesan WhatsApp terformat otomatis, contoh:

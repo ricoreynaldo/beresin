@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { ArrowUpRight, Sparkle } from "lucide-react";
+import { RequestCta } from "@/components/public/request-cta";
+import { MotionObserver } from "@/components/public/motion-observer";
 import { cn } from "@/lib/utils";
 
-/** Wordmark teks. Tanpa ikon: nama brand sendiri yang jadi logonya. */
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn("text-[22px] font-bold tracking-[-0.01em] text-ink-900", className)}>
-      BERESIN
+    <Link href="/" aria-label="Beresin — Beranda" className={cn("site-logo", className)}>
+      BERESIN<span>.</span>
     </Link>
   );
 }
@@ -21,25 +23,22 @@ export type NavKey = (typeof NAV)[number]["key"];
 
 export function SiteHeader({ active }: { active?: NavKey }) {
   return (
-    <header className="relative z-30">
-      <div className="container-page flex h-[4.5rem] items-center justify-between gap-6 sm:h-24 md:justify-center md:gap-12">
+    <header className="site-header">
+      <div className="container-page header-inner">
         <Logo />
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="site-nav" aria-label="Navigasi utama">
           {NAV.map((item) => (
             <Link
               key={item.key}
               href={item.href}
               aria-current={active === item.key ? "page" : undefined}
-              className={cn(
-                "relative py-1.5 text-sm text-ink-700 transition-colors hover:text-ink-900",
-                "after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:bg-ink-900 after:transition-transform",
-                active === item.key ? "text-ink-900 after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100"
-              )}
+              className={cn("nav-link", active === item.key && "nav-active")}
             >
               {item.label}
             </Link>
           ))}
         </nav>
+        <RequestCta size="sm" className="header-cta">Buat request <ArrowUpRight size={15} aria-hidden="true" /></RequestCta>
       </div>
     </header>
   );
@@ -47,10 +46,10 @@ export function SiteHeader({ active }: { active?: NavKey }) {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-ink-200">
-      <div className="container-page flex flex-col gap-3 py-8 text-sm text-ink-500 sm:flex-row sm:items-center sm:justify-between">
-        <p>© {new Date().getFullYear()} Beresin. Butuh sesuatu? Biar kita Beresin.</p>
-        <div className="flex items-center gap-5">
+    <footer className="site-footer">
+      <div className="container-page footer-main">
+        <div><Logo /><p>Banyak kebutuhan. Satu teman beresin.</p></div>
+        <div className="footer-links">
           <Link href="/#cara-kerja" className="hover:text-ink-900">
             Cara Kerja
           </Link>
@@ -62,6 +61,7 @@ export function SiteFooter() {
           </Link>
         </div>
       </div>
+      <div className="container-page footer-bottom"><p>© {new Date().getFullYear()} Beresin.</p><p>Dibikin dengan niat. Diberesin bareng.</p><span className="footer-flower" aria-hidden="true"><Sparkle strokeWidth={1.4} /></span></div>
     </footer>
   );
 }
@@ -75,8 +75,9 @@ export function PublicShell({
 }) {
   return (
     <div className="site-frame flex flex-col">
+      <a href="#main-content" className="skip-link">Langsung ke konten</a>
       <SiteHeader active={active} />
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1"><MotionObserver />{children}</main>
       <SiteFooter />
     </div>
   );

@@ -5,6 +5,7 @@ export const CATEGORIES = [
   { value: "VIDEO", label: "Video & Editing" },
   { value: "DATA", label: "Data & Riset" },
   { value: "AKADEMIK", label: "Tugas & Akademik" },
+  { value: "CEK_PLAGIASI", label: "Cek Plagiasi (Turnitin)" },
   { value: "ADMIN_TASK", label: "Pekerjaan Administratif" },
   { value: "LAINNYA", label: "Lainnya" },
 ] as const;
