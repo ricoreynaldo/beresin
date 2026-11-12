@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { PublicShell } from "@/components/public/site-chrome";
 import { RequestForm } from "@/components/public/request-form";
 import { getWhatsappConfig } from "@/lib/whatsapp-config";
 
@@ -13,12 +10,9 @@ export const metadata: Metadata = {
 export default function CreateRequestPage() {
   const { number, brandName } = getWhatsappConfig();
   return (
-    <PublicShell>
-      <div className="request-page">
-        <Link href="/" className="room-back"><ArrowLeft size={16} />Kembali ke beranda</Link>
-        <header className="request-heading"><p>MULAI DARI CERITA KECILMU</p><h1>Apa yang mau <span>kita beresin?</span></h1><p>Tujuh pertanyaan singkat. Satu langkah lebih dekat ke beres.</p></header>
-        <RequestForm whatsappNumber={number} brandName={brandName} />
-      </div>
-    </PublicShell>
+    <main className="request-fullscreen" id="main-content">
+      <h1 className="sr-only">Request project Beresin</h1>
+      <RequestForm whatsappNumber={number} brandName={brandName} />
+    </main>
   );
 }

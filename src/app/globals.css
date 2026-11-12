@@ -548,3 +548,21 @@
   .room-current { animation: none; }
   .room-send, .room-composer, .room-options button, .room-progress > span { transition: none; }
 }
+
+/* The request route is a viewport-sized chat; only its messages scroll. */
+.request-fullscreen { height: 100dvh; width: 100%; overflow: hidden; }
+.request-fullscreen .request-room { display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 0; border: 0; border-radius: 0; box-shadow: none; }
+.request-fullscreen .room-header { flex-shrink: 0; padding-top: max(18px, env(safe-area-inset-top)); padding-inline: max(24px, calc((100% - 900px) / 2)); }
+.room-exit { display: grid; place-items: center; flex: 0 0 42px; height: 42px; margin-right: 6px; border: 1px solid #e9d9ce; border-radius: 50%; color: #675b54; transition: background 160ms; }
+.room-exit:hover { background: #f5eade; }
+.request-fullscreen .room-progress { flex-shrink: 0; padding-inline: max(24px, calc((100% - 900px) / 2)); }
+.request-fullscreen .room-conversation { flex: 1 1 0; height: auto; min-height: 0; padding-inline: max(24px, calc((100% - 860px) / 2)); }
+.request-fullscreen .room-compose-area { flex-shrink: 0; padding-inline: max(24px, calc((100% - 860px) / 2)); padding-bottom: max(16px, env(safe-area-inset-bottom)); max-height: 55dvh; overflow-y: auto; }
+@media (max-width: 600px) {
+  .request-fullscreen .room-header { padding-inline: 14px; gap: 10px; }
+  .request-fullscreen .room-progress { padding-inline: 16px; }
+  .request-fullscreen .room-conversation { padding-inline: 14px; }
+  .request-fullscreen .room-compose-area { padding-inline: 14px; }
+  .room-exit { flex-basis: 36px; height: 36px; margin-right: 0; }
+  .request-fullscreen .room-brand-avatar { width: 40px; height: 40px; flex-basis: 40px; font-size: 28px; }
+}

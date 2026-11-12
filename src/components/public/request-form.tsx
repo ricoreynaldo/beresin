@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowUp, Check, MessageCircle, Pencil, RotateCcw } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, ArrowUp, Check, MessageCircle, Pencil, RotateCcw } from "lucide-react";
 import * as React from "react";
 import { Button, buttonStyles } from "@/components/ui/button";
 import { CATEGORIES, categoryLabel } from "@/lib/categories";
@@ -72,6 +73,7 @@ export function RequestForm({ whatsappNumber, brandName }: { whatsappNumber: str
   return (
     <section className="request-room" aria-label="Roomchat request project">
       <header className="room-header">
+        <Link href="/" className="room-exit" aria-label="Kembali ke beranda" title="Kembali ke beranda"><ArrowLeft size={21} aria-hidden /></Link>
         <span className="room-avatar room-brand-avatar" aria-hidden>b<span>.</span></span>
         <div><h2>{brandName}</h2><p>Teman beresin idemu</p></div>
         <div className="room-count"><span>{completed === questions.length ? "Siap dikirim" : "Sedikit lagi, beres"}</span><strong>{completed}<span> / {questions.length}</span></strong></div>
