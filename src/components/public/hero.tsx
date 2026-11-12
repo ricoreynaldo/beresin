@@ -6,11 +6,11 @@ import { RequestCta } from "@/components/public/request-cta";
 
 const REQUESTS = [
   { name: "Naya", messages: ["Kak, bikinin logo buat coffee shop-ku dong ☕", "Mau desain kemasan yang lucu, bisa?"] },
-  { name: "Rafi", messages: ["Website buat usaha kecilku, bisa bantu?", "Pengen punya portofolio yang beda ✨"] },
+  { name: "Rafi", messages: ["Kak bisa buatin website buat usaha kecilku?", "Kak, buatin website portofolio bisa?"] },
   { name: "Dita", messages: ["Slide presentasi besok belum cantik 🥲", "Tolong rapihin layout proposal ini, ya"] },
   { name: "Adit", messages: ["Video mentahnya udah ada. Tinggal edit 🎬", "Butuh konten buat launching produk!"] },
   { name: "Lala", messages: ["Data Excel-ku boleh dirapihin? 📊", "Bantuin cari referensi riset, dong"] },
-  { name: "Bima", messages: ["Ada ide. Tapi bingung mulai dari mana…", "Banyak to-do. Bisa bantu beresin? 👀"] },
+  { name: "Bima", messages: ["Aduhh tugasku mepet deadline :(", "Kak tolong cek plagiasi turnitin dong"] },
 ] as const;
 
 /** Illustrated people keep the requests friendly without implying real testimonials. */
