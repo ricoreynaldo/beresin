@@ -70,7 +70,7 @@ export function Hero() {
           ))}
           <span className="hero-spark spark-one"><Sparkle strokeWidth={1.4} /></span>
           <span className="hero-spark spark-two"><Sparkle strokeWidth={1.4} /></span>
-          <span className="tiny-chat tiny-chat-one">bisaaa <span>♡</span></span>
+          <span className="tiny-chat tiny-chat-one">BISAAA DONGGG! <span>♡</span></span>
           <span className="tiny-chat tiny-chat-two"><span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" /></span>
         </div>
 

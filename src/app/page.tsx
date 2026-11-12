@@ -56,7 +56,7 @@ export default function LandingPage() {
 
       <section id="kategori" className="landing-section categories-section">
         <div className="container-page categories-layout" data-reveal>
-          <div className="categories-intro"><SectionLabel index="02">Bisa bantu apa?</SectionLabel><h2>Dari “kepikiran”<br />jadi <span>“kelar juga.”</span></h2><p>Yang kreatif, yang teknis, sampai yang bikin kamu bilang, “aduh, kapan ngerjainnya?”</p><span className="category-doodle" aria-hidden="true"><Sparkle strokeWidth={1.4} /></span><Link href="/request" className="text-link">Ceritakan kebutuhanmu <ArrowUpRight size={17} /></Link></div>
+          <div className="categories-intro"><SectionLabel index="02">Bisa bantu apa?</SectionLabel><h2>Dari “kepikiran”<br />jadi <span>“akhirnyaa kelar juga.”</span></h2><p>Yang kreatif, yang teknis, sampai yang bikin kamu bilang, “aduh, kapan ngerjainnya?”</p><span className="category-doodle" aria-hidden="true"><Sparkle strokeWidth={1.4} /></span><Link href="/request" className="text-link">Ceritakan kebutuhanmu <ArrowUpRight size={17} /></Link></div>
           <div className="category-list">
             {CATEGORIES.map((category) => { const detail = CATEGORY_DETAILS[category.value]; const Icon = detail?.icon || Sparkles; return <Link href="/request" key={category.value} className="category-item" aria-label={`Buat request ${category.label}`}><span className="category-icon"><Icon size={21} strokeWidth={1.6} aria-hidden="true" /></span><div><h3>{category.label}</h3><p>{detail?.description || "Ceritakan kebutuhanmu"}</p></div><ArrowUpRight className="category-arrow" size={17} aria-hidden="true" /></Link>; })}
           </div>
@@ -65,14 +65,14 @@ export default function LandingPage() {
 
       <section id="faq" className="landing-section faq-section">
         <div className="container-page faq-layout" data-reveal>
-          <div><SectionLabel index="03">Biar makin kenal</SectionLabel><h2>Masih ada<br /><span>tanda tanya?</span></h2><div className="faq-chat" aria-hidden="true"><MessageCircle size={18} /><span>Tenang, tanya dulu juga boleh.</span><span className="faq-heart">♡</span></div></div>
+          <div><SectionLabel index="03">Biar makin kenal</SectionLabel><h2>Masih bingung?<br /><span>coba bingungnya dimana</span></h2><div className="faq-chat" aria-hidden="true"><MessageCircle size={18} /><span>Tenang, tanya dulu juga boleh.</span><span className="faq-heart">♡</span></div></div>
           <div className="faq-list">{FAQ.map((item) => <details key={item.q}><summary>{item.q}<span className="faq-plus" aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div>
         </div>
       </section>
 
       <section className="closing-section container-page" data-reveal>
         <div className="closing-panel">
-          <div className="closing-illustration" aria-hidden="true"><span className="closing-ping">Beresin, bisa bantu?</span><span className="happy-face"><i /><i /><b /></span><span className="closing-reply">Bisa. Ceritain dulu <span>♡</span></span><span className="closing-star">✧</span></div>
+          <div className="closing-illustration" aria-hidden="true"><span className="closing-ping">Beresin, bisa bantu?</span><span className="happy-face"><i /><i /><b /></span><span className="closing-reply">Bisa dong! <span>♡</span></span><span className="closing-star">✧</span></div>
           <div className="closing-copy"><span className="section-label">Dari satu chat, kita mulai.</span><h2>To-do kamu banyak.<br />Tenang, ada <span>beresin.</span></h2><p>Nggak harus dipikirin sendirian.<br />Ceritain kebutuhanmu, kita bantu cari jalan.</p><RequestCta size="lg">Yuk, buat request <ArrowRight size={18} aria-hidden="true" /></RequestCta></div>
         </div>
       </section>
