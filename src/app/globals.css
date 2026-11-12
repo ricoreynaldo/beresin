@@ -566,3 +566,21 @@
   .room-exit { flex-basis: 36px; height: 36px; margin-right: 0; }
   .request-fullscreen .room-brand-avatar { width: 40px; height: 40px; flex-basis: 40px; font-size: 28px; }
 }
+
+.room-header p.room-online { color: #15803d; font-weight: 500; }
+
+.room-incoming > .room-message-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding-top: 1px;
+  background: #2e231e;
+  color: #fff;
+  border: 0;
+  transform: rotate(-6deg);
+  box-shadow: 2px 3px 0 #f3b8a2;
+}
+.room-message-avatar > span { color: #ff916f; }
+
+.room-bubble .room-finish { justify-content: flex-start; margin-top: 18px; gap: 10px; }
+.room-bubble .room-finish p { text-align: left; line-height: 1.6; }
